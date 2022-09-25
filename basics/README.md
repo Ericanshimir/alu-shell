@@ -1,4 +1,5 @@
-script that changes the working directory to the user’s home directory
-Task 2.There is no place like home
+Display current directory contents in a long format
+Task 3.The long format
+
 
 
