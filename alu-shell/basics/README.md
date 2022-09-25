@@ -1,3 +1,3 @@
 Display the contents list of your current directory
-Task 1.What's in there?
+Task 1. What's in there?
 
