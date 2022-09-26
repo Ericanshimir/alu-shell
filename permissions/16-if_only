@@ -1,2 +1,2 @@
 #!/bin/bash
-Chown --from=vincent betty hello
+Chown --from=guillaume vincent hello
