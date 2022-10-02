@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
-#displays the content of the file /etc/passwd, using the while loop + IFS
-while IFS= read -r line
-do
-    username=$(echo "$line" | cut -f 1 -d ':')
-    password=$(echo "$line" | cut -f 2 -d ':')
-    userID=$(echo "$line" | cut -f 3 -d ':')
-    groupID=$(echo "$line" | cut -f 4 -d ':')
-    userINFO=$(echo "$line" | cut -f 5 -d ':')
-    home=$(echo "$line" | cut -f 6 -d ':')
-    command=$(echo "$line" | cut -f 7 -d ':')
 
+#displays the visitor IP along with the HTTP status code from the Apache log file
 
-    echo -n "The user $username is part of the $groupID gang, "
-    echo -n "lives in $home and rides $command."
-    echo -n " $userID's place is protected by the passcode $password, "
-    echo "more info about the user here: $userINFO"
-done < "/etc/passwd"
+awk -F' ' '{ print $1 " " $9 }' apache-access.log
