@@ -1,24 +1,32 @@
 #!/usr/bin/env bash
-# init script to manage the process in manage_my_process script
-#pid_file="/var/run/my_process.pid"
-case "$1" in
-		start)
-					./manage_my_process &
-							echo "$!" > /var/run/my_process.pid
-									echo "manage_my_process started"
-											;;
-												stop)
-															pkill -f ./manage_my_process
-																	rm /var/run/my_process.pid
-																			echo "manage_my_process stopped"
-																					;;
-																						restart)
-																									pkill -f ./manage_my_process
-																											./manage_my_process &
-																													echo "$!" > /var/run/my_process.pid
-																															echo "manage_my_process restarted"
-																																	;;
-																																		*)
-																																				# make sure to handle no parameter
-																																					echo "Usage: manage_my_process {start|stop|restart}"
-																																						exit 1																																					esac
+# Start/Stops/Restarts. Script to be used with manage_my_process
+
+argv1=$1
+tmpfile="/var/run/my_process.pid"
+
+startLoop_n_createFile()
+{
+	    ./manage_my_process &
+
+	        echo "$!" > "$tmpfile"
+	}
+killLoop_n_rmFile()
+{
+	    #kill "$(cat "$tmpfile")"
+	        sudo pkill -f "./manage_my_process"
+		    rm "$tmpfile"
+	    }
+    case "$argv1" in
+	        start) echo "manage_my_process started"
+				startLoop_n_createFile
+					;;
+					    stop) echo "manage_my_process stopped"
+						    	killLoop_n_rmFile
+								;;
+								    restart) echo "manage_my_process restarted"
+									    	killLoop_n_rmFile
+											startLoop_n_createFile
+												;;
+												    *) echo "Usage: manage_my_process {start|stop|restart}"
+													    	;;
+												esac
