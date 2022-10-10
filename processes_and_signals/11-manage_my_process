@@ -19,8 +19,7 @@ case "$1" in
 		echo "manage_my_process restarted"
 		;;
 	*)
-		# make sure to handle no parameter
-		echo "Usage: manage_my_process {start|stop|restart}"
-		exit 1
+	# make sure to handle no parameter
+	echo "Usage: manage_my_process {start|stop|restart}"
+	exit 1
 esac
-
